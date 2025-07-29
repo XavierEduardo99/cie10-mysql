@@ -1,5 +1,26 @@
-INSERT INTO 'diagnostic_subgroups' (id, subgroupKey, subgroupDescription, diagnosticGroup_id)
-VALUES (1,'|I1','Enfermedades infecciosas intestinales',1),
+START TRANSACTION;
+
+--
+-- Table structure for table subgrupos_cie10
+--
+
+DROP TABLE IF EXISTS subgrupos_cie10;
+
+CREATE TABLE subgrupos_cie10 (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	clave varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
+	descripcion varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+	idGrupo int(11) NOT NULL,
+	PRIMARY KEY (id),
+	KEY fk_gruposCie10 (idGrupo),
+	CONSTRAINT fk_gruposCie10 FOREIGN KEY (idGrupo) REFERENCES grupos_cie10 (id)
+);
+
+
+LOCK TABLES subgrupos_cie10 WRITE;
+
+INSERT INTO subgrupos_cie10 VALUES 
+(1,'|I1','Enfermedades infecciosas intestinales',1),
 (2,'|I10','Fiebres virales trasmitidas por artrópodos y fiebres virales hemorrágicas',1),
 (3,'|I11','Infecciones virales caracterizadas por lesiones de la piel y de las membranas mucosas',1),
 (4,'|I12','Hepatitis viral',1),
@@ -257,3 +278,6 @@ VALUES (1,'|I1','Enfermedades infecciosas intestinales',1),
 (378,'|XXI6','Personas en contacto con los servicios de salud por otras circunstancias',21),
 (379,'|XXI7','Personas con riesgos potenciales para su salud relacionados con su historia familiar y personal y algunas condiciones que influyen en su estado de salud',21),
 (380,'|XXII','Codigos para situaciones especiales',22);
+UNLOCK TABLES;
+
+COMMIT;

@@ -1,5 +1,22 @@
-INSERT INTO 'diagnostic_groups' (id, groupKey, groupDescription)
-VALUES (1,'I','Ciertas enfermedades infecciosas y parasitarias'),
+START TRANSACTION;
+
+--
+-- Table structure for table grupos_cie10
+--
+
+DROP TABLE IF EXISTS grupos_cie10;
+
+CREATE TABLE grupos_cie10 (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    clave varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
+    descripcion varchar(122) COLLATE utf8mb4_unicode_ci NOT NULL,
+    PRIMARY KEY (id)
+);
+
+LOCK TABLES grupos_cie10 WRITE;
+
+INSERT INTO grupos_cie10 VALUES 
+(1,'I','Ciertas enfermedades infecciosas y parasitarias'),
 (2,'II','Neoplasias'),
 (3,'III','Enfermedades de la sangre y de los organos hematopoyeticos y otros trastornos que afectan el mecanismo de la inmunidad'),
 (4,'IV','Enfermedades endocrinas, nutricionales y metabolicas'),
@@ -21,3 +38,7 @@ VALUES (1,'I','Ciertas enfermedades infecciosas y parasitarias'),
 (20,'XX','Causas extremas de morbilidad y de mortalidad'),
 (21,'XXI','Factores que influyen en el estado de salud y contacto con los servicios de salud'),
 (22,'XXII','Codigos para situaciones especiales');
+
+UNLOCK TABLES;
+
+COMMIT;

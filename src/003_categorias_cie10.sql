@@ -1,5 +1,26 @@
-INSERT INTO 'diagnostic_category' (id,  categoryKey, categoryDescription, categorySubgroup)
-VALUES (1,'A00','Cólera',1),
+START TRANSACTION;
+
+--
+-- Table structure for table categorias_cie10
+--
+
+DROP TABLE IF EXISTS categorias_cie10;
+
+CREATE TABLE categorias_cie10 (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    clave varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+    descripcion varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+    idSubGrupo int(11) NOT NULL,
+    PRIMARY KEY (id),
+    KEY fk_subGrupos (idSubGrupo),
+    CONSTRAINT fk_subGrupos FOREIGN KEY (idSubGrupo) REFERENCES subgrupos_cie10 (id)
+);
+
+
+LOCK TABLES categorias_cie10 WRITE;
+
+INSERT INTO categorias_cie10 VALUES
+(1,'A00','Cólera',1),
 (2,'A01','Fiebres tifoidea y paratifoidea',1),
 (3,'A02','Otras infecciones debidas a Salmonella',1),
 (4,'A03','Shigelosis',1),
@@ -50,8 +71,7 @@ VALUES (1,'A00','Cólera',1),
 (70,'B21','Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en tumores malignos',5),
 (71,'B22','Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en otras enfermedades especificadas',5),
 (72,'B23','Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en otras afecciones',5),
-(73,'B24','Enfermedad por virus de la inmunodeficiencia humana (vih),
- sin otra especificacion',5),
+(73,'B24','Enfermedad por virus de la inmunodeficiencia humana (vih), sin otra especificacion',5),
 (76,'B25','Enfermedad debida a virus citomegálico',6),
 (77,'B26','Parotiditis infecciosa',6),
 (78,'B27','Mononucleosis infecciosa',6),
@@ -248,7 +268,7 @@ VALUES (1,'A00','Cólera',1),
 (333,'D44','Tumor de comportamiento incierto de las glandulas endocrinas',42),
 (334,'D45','Policitemia vera',42),
 (335,'D46','Sindromes mielodisplasicos',42),
-(336,'D47','Otros tumores de comportamiento incierto o desconocido del tejido linfatico, de los organos hematopoyeticos y de tejidos afines',42),
+(336,'D47','Otros tumores de comportamiento incierto o desconocido del tejido linfatico, de los organos hematopoyeticos y de tejidos afines', 42),
 (337,'D48','Tumor de comportamiento incierto o desconocido de otros sitios y de los no especificados',42),
 (341,'C15','Tumor maligno del esofago',43),
 (342,'C16','Tumor maligno del estomago',43),
@@ -2042,3 +2062,6 @@ VALUES (1,'A00','Cólera',1),
 (2900,'U81','Agentes resistentes a vancomicina y antibióticos relacionados',380),
 (2901,'U88','Agente resistente a multiples antibioticos',380),
 (2902,'U89','Agente resistente a otros antibióticos y antibióticos sin especificar',380);
+UNLOCK TABLES;
+
+COMMIT;
